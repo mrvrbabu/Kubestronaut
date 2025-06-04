@@ -1,0 +1,15 @@
+apiVersion: v1
+data:
+  anathor-param: another-value
+  eos-digitalcm.txt: |
+    # This is from eos-digital
+    parameter1 = value1
+    parameter2 = value2
+  extra-param: extra-value
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2025-06-03T04:50:37Z"
+  name: eos-digialcm
+  namespace: default
+  resourceVersion: "3667458"
+  uid: 2fde5ee7-e9e0-4081-bda7-6d1bb9bfc158

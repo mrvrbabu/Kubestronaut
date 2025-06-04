@@ -1,0 +1,11 @@
+# Below are the details for airflow postgres db
+postgres_user = airflow
+postgres_password = airflow
+postgres_db = airflow 
+
+
+
+# Not in use
+#POSTGRES_USER = airflow
+#POSTGRES_PASSWORD = airflow
+#POSTGRES_DB = airflow

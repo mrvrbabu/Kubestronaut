@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kuard-pod
+spec:
+  containers:
+    - name: kuard-pod
+      image: gcr.io/kuar-demo/kuard-amd64:blue
+      imagePullPolicy: Always
+      command:
+        - "/kuard"
+        - "$(EXTRA-PARAM)"
+      # Get EXTRA-PARAM env variable from config map 
+      env:
+        - name: EXTRA-PARAM
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-cm 
+              key: extra-param
+
+      # Get postgres env variables from config map for airflow
+        - name: POSTGRES_USER
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-cm 
+              key: postgres_user
+
+  restartPolicy: Never

@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kuard-pod
+spec:
+  containers:
+    - name: kuard-pod
+      image: gcr.io/kuar-demo/kuard-amd64:blue
+      imagePullPolicy: Always
+      command:
+        - "/kuard"
+        - "$(EXTRA-PARAM)"
+        - "$(POSTGRES_USER)"
+        - "$(POSTGRES_PASSWORD)"
+        - "$(POSTGRES_DB)"
+      
+      # Import env variables from configmap
+      env:
+        - name: EXTRA-PARAM
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-cm
+              key: extra-param
+
+      # Get postgres user details from postgres-cm configmap
+        - name: POSTGRES_USER
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-cm
+              key: postgres_user
+
+      # Get postgres passwrod details from postgres-cm configmap 
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-cm
+              key: postgres_password
+
+      # Get postgres db details from postgres-cm configmap
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-cm
+              key: postgres_db
+
+      # Mount config map as a volumemount inside the pod 
+      volumeMounts:
+        - name: config-volume
+          mountPath: /config
+  volumes:
+      - name: config-volume
+        configMap:
+          name: postgres-cm
+
+
+  restartPolicy: Never

@@ -1,0 +1,18 @@
+apiVersion: v1
+data:
+  extra-param: USA
+  postgres-cm.txt: |
+    # This is a sample config file that will be used to pass postgres details
+    parameter1 = value1
+    parameter2 = value2
+    parameter3 = value3
+  postgres_db: airflow
+  postgres_password: airflow
+  postgres_user: airflow
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2025-06-04T06:56:35Z"
+  name: postgres-cm
+  namespace: default
+  resourceVersion: "3800922"
+  uid: 4eed63c0-4d54-4034-866c-045deca17083
